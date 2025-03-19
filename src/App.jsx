@@ -10,7 +10,7 @@ import FormComponent from "./components/FormPage";
 // import database from "./firebase";
 import { BrowserRouter,Route,Routes } from "react-router-dom";
 import AboutMe from "./components/AboutMe";
-import About from "./components/AboutMe/about";
+// import About from "./components/AboutMe/about";
 function App() {
   // const [data, setData] = useState([]);
   // const [userID,setUserID] = useState(1);
@@ -106,7 +106,7 @@ function App() {
       <Routes>
         <Route path="/" element={<FormComponent/>}/>
         <Route path="/aboutme" element={<AboutMe/>}/>
-        <Route path="/about" element={<About/>}/>
+      
       </Routes>
       </BrowserRouter>
     </div>

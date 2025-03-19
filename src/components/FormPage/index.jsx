@@ -14,37 +14,44 @@ const FormComponent = () => {
     // Push data to Realtime database 
     function Push() {
         // e.preventDafault()
-      setUserID(userID += 1);
-      console.log(userID);
 
-      // for set data in real time database of firebase
-      set(ref(database, 'users/' + userID), { //'users/' +(concatinate) userID ==> user k ander 1,2 
-        
-        userData
-       
-      }).then((e)=>{
-
-        console.log(e);
-        alert('Data Submit Successfully')
-
-        // to get data from firebase
-        get(child(ref(database), `users/${userID}`)).then((s) => {
-            // console.log(s.val());
-            let userInfo = s.val()
-            console.log(userInfo);
-            window.localStorage.setItem('userInfo',JSON.stringify(userInfo));
-            navigate('/aboutme');
+        if(userData.fullName && userData.age && userData.country && userData.proffession && userData.education) {
+          setUserID(userID += 1);
+          console.log(userID);
+    
+          // for set data in real time database of firebase
+          set(ref(database, 'users/' + userID), { //'users/' +(concatinate) userID ==> user k ander 1,2 
             
-        })
+            userData
+           
+          }).then((e)=>{
+    
+            console.log(e);
+            alert('Data Submit Successfully')
+    
+            // to get data from firebase
+            get(child(ref(database), `users/${userID}`)).then((s) => {
+                // console.log(s.val());
+                let userInfo = s.val()
+                console.log(userInfo);
+                window.localStorage.setItem('userInfo',JSON.stringify(userInfo));
+                navigate('/aboutme');
+                
+            })
+    
+           
+    
+          }).catch((c)=> {
+            console.log(c);
+    
+            alert('Fill the details')
+          })
+    
+        } else {
+          alert('Kindly Fill all the details')
+        }
 
-       
-
-      }).catch((c)=> {
-        console.log(c);
-
-        alert('Fill the details')
-      })
-
+     
     }
   
 
@@ -88,10 +95,10 @@ const FormComponent = () => {
         {/* Left Side - Image */}
         <div className="w-full md:w-[50%] bg-blue-50 text-purple-950 md:h-[100vh] p-[20px] md:py-[30px] md:px-[50px] flex justify-center items-center flex-col text-center">
           <h1 className="md:text-5xl font-bold text-2xl">Create Your About Us</h1>
-          <p className="md:text-xl md:py-[30px] py-[10px] text-[.9rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, quibusdam at suscipit ipsam nostrum quas place</p>
+          <p className="md:text-[1rem] md:py-[30px] py-[10px] text-[.9rem]">This site utilizes advanced AI to generate a compelling and personalized About Us section for you. Simply provide your details, and let AI create a professional and engaging introduction effortlessly.</p>
 
           <div>
-            <img src="https://www.playbookux.com/wp-content/uploads/2016/06/team.png" alt="" />
+            <img src="https://www.playbookux.com/wp-content/uploads/2016/06/team.png" alt="" className="md:h-[400px]" />
           </div>
         </div>
         
@@ -123,7 +130,7 @@ const FormComponent = () => {
 
             <div className="flex justify-center items-center gap-[40px] md:gap-[70px]">
 
-            <button type="button" onClick={Push} className="md:text-xl cursor-pointer bg-purple-950 transition-all text-white px-[16px] py-[5px] md:px-[25px] md:py-[7px] rounded hover:bg-white hover:text-black" >
+            <button type="button" onClick={Push} className="md:text-xl cursor-pointer bg-purple-950 transition-all text-white px-[16px] py-[5px] md:px-[25px] md:py-[7px] rounded hover:bg-white hover:border-[2px] hover:border-purple-950  hover:text-black " >
               Submit
             </button>
 
